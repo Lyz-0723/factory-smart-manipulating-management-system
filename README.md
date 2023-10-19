@@ -1,0 +1,1 @@
+# factory-smart-manipulating-management-system
