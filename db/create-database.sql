@@ -35,7 +35,7 @@ CREATE TABLE Users
     password     VARCHAR(64) NOT NULL,
     company_info VARCHAR(90) NOT NULL,
     contact_info VARCHAR(90) NOT NULL,
-    is_admin     INT         NOT NULL
+    is_admin     BOOLEAN     NOT NULL
 );
 
 -- Create ITEMS table
@@ -110,5 +110,5 @@ CREATE TABLE Environment
     vibration              FLOAT NOT NULL,
     chemical_concentration FLOAT NOT NULL,
     noise                  INT   NOT NULL,
-    record_time DATA NOT NULL
+    record_time            DATETIME NOT NULL
 );
