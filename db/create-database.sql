@@ -6,8 +6,7 @@ DROP USER IF EXISTS 'fsmmsRoot'@'localhost';
 DROP USER IF EXISTS 'fsmmsAdmin'@'%';
 
 -- Setting configuration
-SOURCE
-/tmp/fsmmsConfig.sql;
+SOURCE /tmp/fsmmsConfig.sql;
 
 -- Create database
 CREATE DATABASE fsmms;
@@ -31,7 +30,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, EXECUTE, INDEX ON fsmms.* T
 CREATE TABLE Users
 (
     user_id      INT AUTO_INCREMENT PRIMARY KEY,
-    user_name    VARCHAR(50) NOT NULL UNIQUE,
+    user_name    VARCHAR(60) NOT NULL UNIQUE,
     password     VARCHAR(64) NOT NULL,
     company_info VARCHAR(90) NOT NULL,
     contact_info VARCHAR(90) NOT NULL,
@@ -44,7 +43,6 @@ CREATE TABLE Items
     item_id          INT AUTO_INCREMENT PRIMARY KEY,
     item_name        VARCHAR(50) NOT NULL,
     item_description VARCHAR(60),
-    status           INT         NOT NULL,
     unit_price       INT         NOT NULL
 );
 
@@ -52,7 +50,7 @@ CREATE TABLE Items
 CREATE TABLE Production_Lines
 (
     pl_id          INT AUTO_INCREMENT PRIMARY KEY,
-    pl_name        VARCHAR(50) NOT NULL,
+    pl_name        VARCHAR(60) NOT NULL,
     pl_description VARCHAR(60),
     status         INT         NOT NULL,
     item_id        INT         NOT NULL,
@@ -66,7 +64,7 @@ CREATE TABLE Production_Line_Records
     rating             INT  NOT NULL,
     production_output  INT  NOT NULL,
     energy_consumption INT  NOT NULL,
-    record_time        DATE NOT NULL,
+    record_time        DATETIME NOT NULL,
     pl_id              INT  NOT NULL,
     FOREIGN KEY (pl_id) REFERENCES Production_Lines (pl_id)
 );
@@ -76,8 +74,8 @@ CREATE TABLE Machines
 (
     machine_id    INT AUTO_INCREMENT PRIMARY KEY,
     serial_number VARCHAR(30) NOT NULL,
-    usage         VARCHAR(30),
-    positon       INT         NOT NULL,
+    machine_usage VARCHAR(30) NOT NULL,
+    position      INT         NOT NULL,
     status        INT         NOT NULL,
     script        VARCHAR(120),
     pl_id         INT         NOT NULL,
