@@ -1,0 +1,12 @@
+sip==5.5.0
+uvicorn
+fastapi[all]~=0.103.1
+databases~=0.8.0
+sshtunnel~=0.4.0
+asyncmy
+passlib[bcrypt]~=1.7.4
+python-multipart
+python-jose
+pydantic~=2.3.0
+SQLAlchemy
+greenlet
