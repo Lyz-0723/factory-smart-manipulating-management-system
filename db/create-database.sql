@@ -51,7 +51,7 @@ CREATE TABLE Production_Line_Status
 (
     status_id       INT PRIMARY KEY,
     status          VARCHAR(9) NOT NULL
-)
+);
 
 -- Create PRODUCTION_LINES table
 CREATE TABLE Production_Lines
@@ -60,7 +60,7 @@ CREATE TABLE Production_Lines
     pl_name        VARCHAR(60) NOT NULL,
     pl_description VARCHAR(60),
     status         INT         NOT NULL,
-    FOREIGN KEY (status) REFERENCES Production_Line_Status (status_id)
+    FOREIGN KEY (status) REFERENCES Production_Line_Status (status_id),
     item_id        INT         NOT NULL,
     FOREIGN KEY (item_id) REFERENCES Items (item_id)
 );
@@ -70,7 +70,7 @@ CREATE TABLE Production_Line_Record_Ratings
 (
     rating_id       INT PRIMARY KEY,
     rating          VARCHAR(9) NOT NULL
-)
+);
 
 -- Create PRODUCTION_LINE_RECORDS table
 CREATE TABLE Production_Line_Records
@@ -90,7 +90,7 @@ CREATE TABLE Machine_Status
 (
     status_id       INT PRIMARY KEY,
     status          VARCHAR(9) NOT NULL
-)
+);
 
 -- Create MACHINES table
 CREATE TABLE Machines
@@ -111,7 +111,7 @@ CREATE TABLE Order_Status
 (
     status_id       INT PRIMARY KEY,
     status          VARCHAR(9) NOT NULL
-)
+);
 
 -- Create ORDERS table
 CREATE TABLE Orders

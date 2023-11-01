@@ -18,11 +18,11 @@ INSERT INTO Items (item_name, item_description, unit_price) VALUES
 
 -- Production_Lines table
 INSERT INTO Production_Lines (pl_name, pl_description, status, item_id) VALUES
-('Production Line 1', 'PL Description 1', 1, 1),
-('Production Line 2', 'PL Description 2', 0, 2),
-('Production Line 3', 'PL Description 3', 0, 3),
-('Production Line 4', 'PL Description 4', 0, 4),
-('Production Line 5', 'PL Description 5', 1, 5);
+('Production Line 1', 'PL Description 1', 2, 1),
+('Production Line 2', 'PL Description 2', 1, 2),
+('Production Line 3', 'PL Description 3', 1, 3),
+('Production Line 4', 'PL Description 4', 1, 4),
+('Production Line 5', 'PL Description 5', 2, 5);
 
 -- Production_Line_Records table
 INSERT INTO Production_Line_Records (rating, production_output, energy_consumption, record_time, pl_id) VALUES
@@ -42,11 +42,11 @@ INSERT INTO Machines (serial_number, machine_usage, position, status, script, pl
 
 -- Orders table
 INSERT INTO Orders (total_amount, status, create_date, payment_method, pay_date, customize_details, ordered_user_id, ordered_item_id) VALUES
-(100, 1, '2023-10-15', 'Debit Card', '2023-10-16 00:00:00', 'red:CB:1', 2, 1),
-(150, 1, '2023-10-15', 'Credit Card', '2023-10-16 03:00:00', 'black:CB:2', 2, 2),
-(120, 1, '2023-10-15', 'Credit Card', '2023-10-16 06:00:00', 'black::2', 3, 3),
-(80, 0, '2023-10-15', 'Check', '2023-10-16 09:00:00', 'red:CD:1', 4, 4),
-(200, 1, '2023-10-15', 'Check', '2023-10-16 12:00:00', 'blzzxxxxxue:CE:1', 5, 5);
+(100, 2, '2023-10-15', 'Debit Card', '2023-10-16 00:00:00', 'red:CB:1', 2, 1),
+(150, 2, '2023-10-15', 'Credit Card', '2023-10-16 03:00:00', 'black:CB:2', 2, 2),
+(120, 2, '2023-10-15', 'Credit Card', '2023-10-16 06:00:00', 'black::2', 3, 3),
+(80, 1, '2023-10-15', 'Check', '2023-10-16 09:00:00', 'red:CD:1', 4, 4),
+(200, 2, '2023-10-15', 'Check', '2023-10-16 12:00:00', 'blzzxxxxxue:CE:1', 5, 5);
 
 -- Environment table
 INSERT INTO Environment (temperature, humidity, pressure, vibration, chemical_concentration, noise, record_time) VALUES
