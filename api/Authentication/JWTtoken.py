@@ -27,7 +27,7 @@ async def get_current_user(token=Depends(oauth2_token_scheme)):
         payload = jwt.decode(
             token, ACCESS_TOKEN_SECRET_KEY, algorithms=ALGORITHM)
 
-        user = await check_user(payload["id"])
+        user = await check_user(payload["user_id"])
 
         if user:
             if verify_password(payload["password"], user.password):

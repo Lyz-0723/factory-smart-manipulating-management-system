@@ -2,20 +2,17 @@ from pydantic import BaseModel
 
 # ----- Schemas for User table -----
 class BaseUser(BaseModel):
-  name: str
-  is_admin: int
-  company_info: str
-  contact_info: str
+  user_name: str | None = None
+  password: str | None = None
+  company_info: str | None = None
+  contact_info: str | None = None
 
   class Config:
     from_attributes = True
 
 
 class GetUser(BaseUser):
-  id: int
-
-
-class CreateUser(BaseUser):
-  password: str
+  is_admin: int
+  user_id: int
 
 

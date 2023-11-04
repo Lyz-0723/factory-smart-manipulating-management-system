@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy import Column, ForeignKey
 from database import metadata
-from Model.User import User
+from Model.Users import Users
 from Model.ProductionLine import Items
 
 Order_Status = sqlalchemy.Table(
@@ -22,6 +22,6 @@ Orders = sqlalchemy.Table(
   Column("payment_method", sqlalchemy.VARCHAR(30), nullable=False),
   Column("pay_date", sqlalchemy.DATE, nullable=False),
   Column("customize_details", sqlalchemy.VARCHAR(60), nullable=False),
-  Column("ordered_user_id", sqlalchemy.INTEGER, ForeignKey(User.c.user_id)),
+  Column("ordered_user_id", sqlalchemy.INTEGER, ForeignKey(Users.c.user_id)),
   Column("ordered_item_id", sqlalchemy.INTEGER, ForeignKey(Items.c.item_id))
 )

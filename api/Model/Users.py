@@ -2,8 +2,8 @@ import sqlalchemy
 from sqlalchemy import Column
 from database import metadata
 
-User = sqlalchemy.Table(
-    "User",
+Users = sqlalchemy.Table(
+    "Users",
     metadata,
     Column("user_id", sqlalchemy.INTEGER, primary_key=True, index=True),
     Column("user_name", sqlalchemy.VARCHAR(60), nullable=False, unique=True),

@@ -14,7 +14,7 @@ server = SSHTunnelForwarder(
 )
 
 server.start()
-DATABASE_URL = f"mysql+asyncmy://fsmmsRoot:{config.db_password}@localhost:{str(server.local_bind_port)}/fsmms"
+DATABASE_URL = f"mysql+asyncmy://fsmmsAdmin:{config.db_password}@localhost:{str(server.local_bind_port)}/fsmms"
 
 db = databases.Database(DATABASE_URL)
 
