@@ -3,7 +3,7 @@ from typing import Annotated
 from Authentication.JWTtoken import get_current_user
 from Authentication.hashing import hashing_password
 from Repository.UserCRUD import get_spec_user, create_new_user, modify_spec_user
-from Repository.CommonCRUD import check_user
+from Repository.CommonCRUD import check_user_name
 
 from Schema.user import BaseUser, GetUser
 from exception import duplicate_data, bad_request
@@ -14,7 +14,7 @@ router = APIRouter(prefix="/user", tags=["User"])
 async def create_user(user: BaseUser) -> None:
   """The endpoint of creating new user"""
 
-  if await check_user(user.user_name):
+  if await check_user_name(user.user_name):
     raise duplicate_data
 
   if not await create_new_user(user):
