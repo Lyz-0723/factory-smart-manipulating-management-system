@@ -43,3 +43,14 @@ async def check_item(item_id: int) -> GetItem:
     """Check if the item with corresponding id exist"""
     stmt = Items.select().where(Items.c.item_id == item_id)
     return await db.fetch_one(stmt)
+
+
+async def check_item_name(item_name: str) -> None:
+    """Check if the item name already been used"""
+    stmt = Items.select().where(Items.c.item_name == item_name)
+    return await db.fetch_one(stmt)
+
+
+async def check_item_values(item: BaseItem):
+    """Check if the item values are valid."""
+    return True if item.unit_price > 0 else False

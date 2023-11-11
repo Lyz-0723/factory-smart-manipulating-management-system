@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from typing import Annotated
 from Authentication.JWTtoken import get_current_user
 from Repository.CommonCRUD import check_user, check_order_belonger, check_order_existence, check_order_values, check_item
-from Repository.OrderCRUD import get_self_orders, get_self_spec_order, get_self_spec_status_orders, make_self_new_order, modify_self_spec_ordwr, withdraw_spec_order  
+from Repository.OrderCRUD import get_self_orders, get_self_spec_order, get_self_spec_status_orders, make_self_new_order, modify_self_spec_order, withdraw_spec_order  
 from exception import no_such_user, no_such_order, action_forbidden, bad_request, no_such_item
 
 from Schema.user import GetUser
@@ -57,7 +57,7 @@ async def make_order(new_order: BaseOrder, current_user: Annotated[GetUser, Depe
 async def modify_order(modify_order: GetOrder, current_user: Annotated[GetUser, Depends(get_current_user)]) -> None:
   """The endpoint of modifying the order"""
   order = await get_self_spec_order(modify_order.order_id)
-  print(order.ordered_user_id, current_user.user_id)
+
   if (modify_order.order_id <= 0) or (order.ordered_user_id != current_user.user_id) or (modify_order.ordered_user_id != None):
     raise action_forbidden
   
@@ -70,7 +70,7 @@ async def modify_order(modify_order: GetOrder, current_user: Annotated[GetUser, 
   update_data = modify_order.model_dump(exclude_unset=True, exclude_none=True)
   update = GetOrder.model_validate(order).model_copy(update=update_data)
   
-  if not await modify_self_spec_ordwr(update):
+  if not await modify_self_spec_order(update):
     raise bad_request
   
 

@@ -2,8 +2,8 @@ from pydantic import BaseModel
 
 # ----- Schemas for Items table -----
 class BaseItem(BaseModel):
-  name: str
-  description: str
+  item_name: str
+  item_description: str
   unit_price: int
 
   class Config:
@@ -11,4 +11,4 @@ class BaseItem(BaseModel):
 
 
 class GetItem(BaseItem):
-  id: int
+  item_id: int
