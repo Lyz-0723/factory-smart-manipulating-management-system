@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date
+from datetime import datetime
 
 # ----- Schemas for Orders table -----
 class BaseEnvironmentRecord(BaseModel):
@@ -9,11 +9,11 @@ class BaseEnvironmentRecord(BaseModel):
   vibration: float
   chemical_concentration: float
   noise: int
-  record_date: date
+  record_time: datetime
 
   class Config:
     from_attributes = True
 
 
 class GetEnviromentRecord(BaseEnvironmentRecord):
-  id: int
+  env_record_id: int

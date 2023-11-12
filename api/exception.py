@@ -21,3 +21,6 @@ action_forbidden = HTTPException(status_code=status.HTTP_403_FORBIDDEN,
 
 no_such_item = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                              detail="Item does not exist.")
+
+no_such_record = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                               detail="Record does not exist.")

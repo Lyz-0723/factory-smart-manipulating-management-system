@@ -20,8 +20,13 @@ async def get_items(_: Annotated[GetUser, Depends(get_current_user)]) -> list[Ge
 @router.get("/{item_id}")
 async def get_item(item_id: int, _: Annotated[GetUser, Depends(get_current_user)]) -> GetItem:
   """The endpoint of getting specific item"""
+
+  item = await get_spec_item(item_id)
+
+  if not item:
+    raise no_such_item
   
-  return await get_spec_item(item_id)
+  return item
 
 
 @router.post("/")

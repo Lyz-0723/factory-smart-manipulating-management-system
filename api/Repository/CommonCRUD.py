@@ -1,8 +1,10 @@
 from Model.Users import Users
 from Model.Order import Orders, Items
+from Model.Environment import Environment
 from Schema.user import GetUser
 from Schema.order import GetOrder, BaseOrder
 from Schema.item import BaseItem, GetItem
+from Schema.environment import BaseEnvironmentRecord
 from database import db
 
 
@@ -52,5 +54,10 @@ async def check_item_name(item_name: str) -> None:
 
 
 async def check_item_values(item: BaseItem):
-    """Check if the item values are valid."""
+    """Check if the item values are valid"""
     return True if item.unit_price > 0 else False
+
+
+async def check_env_record_values(record: BaseEnvironmentRecord):
+    """Check if the record values are valid"""
+    return False if record.noise <= 0 else True

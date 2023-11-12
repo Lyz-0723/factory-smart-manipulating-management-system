@@ -12,5 +12,5 @@ Environment = sqlalchemy.Table(
   Column("vibration", sqlalchemy.FLOAT, nullable=False),
   Column("chemical_concentration", sqlalchemy.FLOAT, nullable=False),
   Column("noise", sqlalchemy.INTEGER, nullable=False),
-  Column("record_time", sqlalchemy.DATE, nullable=False)
+  Column("record_time", sqlalchemy.DATETIME, nullable=False)
 )
