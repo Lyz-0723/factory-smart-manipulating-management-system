@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-routers = [Router.user, Router.machine, Router.environment, Router.order, Router.item, Router.production_line, Router.production_line_records, Router.token]
+routers = [Router.user, Router.machine, Router.environment, Router.order, Router.item, Router.production_line, Router.production_line_records, Router.token, Router.status_and_rating]
 for router in routers:
     app.include_router(router)
 
