@@ -82,8 +82,8 @@ async def check_machine_values(machine: dict, type: int):
     """Check if the machine data is valid. type: 0 -> create, 1 -> modify"""    
     stmt = Machines.select().where(Machines.c.serial_number == machine.serial_number)
     if (type == 0 and (await db.fetch_one(stmt))) or (type == 1 and (await db.fetch_one(stmt)) and
-                                                    (await db.fetch_one(stmt)).serial_number and 
-                                                    machine.machine_id == (await db.fetch_one(stmt)).machine_id):
+                                                     (await db.fetch_one(stmt)).serial_number and 
+                                                     machine.machine_id != (await db.fetch_one(stmt)).machine_id):
         return False
     
     if machine.status and (machine.status < 1 or machine.status > 4 or not await check_production_line(machine.pl_id)):
@@ -94,5 +94,22 @@ async def check_machine_values(machine: dict, type: int):
     for m in machines:
         if m.position == machine.position:
             return False
+        
+    return True
+
+
+async def check_pl_values(pl: dict, type: int):
+    """Check if the production line data is valid. type: 0 -> create, 1 -> modify"""    
+    stmt = Production_Lines.select().where(Production_Lines.c.pl_name == pl.pl_name)
+    if (type == 0 and (await db.fetch_one(stmt))) or (type == 1 and (await db.fetch_one(stmt)) and
+                                                     (await db.fetch_one(stmt)).pl_name and 
+                                                     pl.pl_id != (await db.fetch_one(stmt)).pl_id):
+        return False
+    
+    if pl.item_id and not await check_item(pl.item_id):
+        return False
+    
+    if pl.status and (pl.status != 1 and pl.status != 2) or type == 1 and (not await check_production_line(pl.pl_id)):
+        return False
         
     return True

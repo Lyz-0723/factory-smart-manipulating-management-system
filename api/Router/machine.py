@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 from typing import Annotated
 from Authentication.JWTtoken import get_current_user
 from Repository.MachineCRUD import get_all_machines_in_production_line, get_specific_machine, add_new_machine, modify_specific_machine, delete_specific_machine
-from Repository.CommonCRUD import check_production_line, check_machine, check_machine_values
+from Repository.CommonCRUD import check_machine, check_machine_values
+from Repository.ProductionLineCRUD import get_specific_production_line
 from exception import no_such_pl, no_such_machine, action_forbidden, bad_request
 
 from Schema.machine import BaseMachine, GetMachine
@@ -16,7 +17,7 @@ async def get_all_machines_in_pl(pl_id: int, current_user: Annotated[GetUser, De
   if not current_user.is_admin:
     raise action_forbidden
   
-  if not await check_production_line(pl_id):
+  if not await get_specific_production_line(pl_id):
     raise no_such_pl
 
   return await get_all_machines_in_production_line(pl_id)
