@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 app.include_router(Router.user)
-# app.include_router(Router.machine)
+app.include_router(Router.machine)
 app.include_router(Router.environment)
 app.include_router(Router.order)
 app.include_router(Router.item)

@@ -24,3 +24,9 @@ no_such_item = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
 
 no_such_record = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                detail="Record does not exist.")
+
+no_such_pl = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                               detail="Production line does not exist.")
+
+no_such_machine = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                               detail="Machine does not exist.")
