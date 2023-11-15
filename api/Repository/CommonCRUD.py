@@ -1,12 +1,12 @@
 from Model.Users import Users
 from Model.Order import Orders, Items
-from Model.ProductionLine import Production_Lines
+from Model.ProductionLine import Production_Lines, Production_Line_Records
 from Model.Machine import Machines
 from Schema.user import GetUser
 from Schema.order import GetOrder, BaseOrder
 from Schema.item import BaseItem, GetItem
 from Schema.environment import BaseEnvironmentRecord
-from Schema.pl import BasePL, GetPL
+from Schema.pl_record import BasePLRecord
 from Schema.machine import BaseMachine
 from database import db
 
@@ -113,3 +113,14 @@ async def check_pl_values(pl: dict, type: int):
         return False
         
     return True
+
+
+async def check_pl_record_values(pl_record: BasePLRecord):
+    """Check if the production line record values is valid"""
+    return False if (pl_record.rating < 0 or pl_record.rating > 4 or pl_record.energy_consumption <= 0 or pl_record.production_output <= 0) else True
+
+
+async def check_pl_record(pl_record_id: int):
+    stmt = Production_Line_Records.select().where(Production_Line_Records.c.pl_record_id == pl_record_id)
+    record = await db.fetch_one(stmt)
+    return False if not record else True
