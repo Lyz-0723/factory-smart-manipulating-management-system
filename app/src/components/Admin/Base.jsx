@@ -15,10 +15,12 @@ const AdminBase = () => {
         <div className="header">
           <div className="logo-container">
             {/* <img src="logo.svg" alt="Logo" className="logo"> */}
-            <div className="brand-name">iFactory</div>
+            <div className="brand-name">iFactory - Administrator Mode</div>
           </div>
           <div className="nav">
-            <div className="nav-item">Home</div>
+            <div className="nav-item" onClick={() => setMode(51)}>
+              Home
+            </div>
             <div className="nav-item" onClick={() => setMode(52)}>
               Order
             </div>
@@ -35,7 +37,6 @@ const AdminBase = () => {
         </div>
         {mode === 51 && <AdminDashBoard />}
         {mode === 52 && <OrderManagement />}
-        Admin Login
         <div className="footer">
           {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}
           <div className="footer-text">
