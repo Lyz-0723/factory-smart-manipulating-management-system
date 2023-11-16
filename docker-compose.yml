@@ -7,13 +7,13 @@ services:
       - "10001:8000"
     networks:
       - fsmms
-  app:
-    build:
-      context: ./app
-    ports:
-      - "10000:3000" 
-    networks:
-      - fsmms
+  # app:
+  #   build:
+  #     context: ./app
+  #   ports:
+  #     - "10000:3000" 
+  #   networks:
+  #     - fsmms
 
 networks:
   fsmms:
