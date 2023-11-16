@@ -3,20 +3,28 @@ import "./LogIn.css";
 import { useContext } from "react";
 import { AppContext } from "../../App";
 
+import get_access_token from "../../requests/login";
+import { get_self_detail } from "../../requests/user";
+
 const LogIn = () => {
-  let { setLogOutBtn } = useContext(AppContext);
+  let { setMode, setLogOutBtn, setUser } = useContext(AppContext);
 
   const log_in = async () => {
     const account = document.getElementById("inputAccount").value;
     const password = document.getElementById("inputPassword").value;
 
-    if (account == "" || password == "") {
+    if (account === "" || password === "") {
       console.log("Invalid input.");
       return;
     }
-
-    console.log(account, password);
-    // TODO: - LogIn actions
+    const result = await get_access_token(account, password);
+    if (result.access_token) {
+      window.localStorage.setItem("access_token", result.access_token);
+      window.localStorage.setItem("isLogIn", true);
+      setMode(1);
+      setUser(await get_self_detail());
+      setLogOutBtn(true);
+    }
   };
 
   return (
@@ -34,7 +42,7 @@ const LogIn = () => {
         <br />
         {/* LogIn password */}
         <input
-          type="text"
+          type="password"
           placeholder="請輸入密碼 "
           className="input"
           id="inputPassword"
