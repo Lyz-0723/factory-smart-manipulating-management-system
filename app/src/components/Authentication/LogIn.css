@@ -1,0 +1,24 @@
+.input{
+    height: 40px; 
+    width:300px; 
+    border-radius:5px ;
+    margin:3% 0% 0% 38%;
+}
+
+
+.button{
+    height: 40px; 
+    width:305px; 
+    border-radius:5px ;
+    margin:3% 0% 0% 38%;
+    background-color: black;
+    color: white;
+}
+
+.button:hover{
+    background-color: rgb(73, 66, 66);
+}
+
+.input:focus{
+    outline-color: rgb(114, 114, 212);
+}
