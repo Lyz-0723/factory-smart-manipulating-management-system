@@ -22,9 +22,15 @@ const LogIn = () => {
     if (result.access_token) {
       window.localStorage.setItem("access_token", result.access_token);
       window.localStorage.setItem("isLogIn", true);
-      setMode(1);
-      setUser(await get_self_detail());
-      setLogOutBtn(true);
+      const user_detail = await get_self_detail();
+      if (user_detail) {
+        setUser(user_detail);
+        if (user_detail.is_admin === 0) setMode(1);
+        else if (user_detail.is_admin === 1) setMode(51);
+        setLoading(0);
+        setLogOutBtn(true);
+        return;
+      }
     }
   };
 

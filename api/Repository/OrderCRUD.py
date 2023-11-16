@@ -2,6 +2,13 @@ from Model.Order import Orders, Order_Status
 from database import db, execute_stmt_in_tran
 from Schema.order import GetOrder, BaseOrder
 
+async def get_all_orders() -> list[GetOrder]:
+  """Get all orders actions with db"""
+  stmt = Orders.select()
+  
+  return await db.fetch_all(stmt)
+
+
 async def get_self_orders(user_id: int) -> list[GetOrder]:
   """Get all orders actions with db"""
   stmt = Orders.select().where(Orders.c.ordered_user_id == user_id)

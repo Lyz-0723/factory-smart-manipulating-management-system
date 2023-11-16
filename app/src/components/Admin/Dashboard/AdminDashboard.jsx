@@ -77,9 +77,9 @@ const AdminDashBoard = () => {
         <div className="nav-arrow left">&#8249;</div>
         <div className="nav-arrow right">&#8250;</div>
         <div className="dot-container">
-          <div className="dot" onclick="currentSlide(1)"></div>
-          <div className="dot" onclick="currentSlide(2)"></div>
-          <div className="dot" onclick="currentSlide(3)"></div>
+          <div className="dot" onClick={() => {}}></div>
+          <div className="dot" onClick={() => {}}></div>
+          <div className="dot" onClick={() => {}}></div>
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ import OrderManagement from "./Order/OrderManagement";
 import "../Base.css";
 
 const AdminBase = () => {
-  let { mode, logOutBtn, logOut } = useContext(AppContext);
+  let { mode, setMode } = useContext(AppContext);
 
   return (
     <div>
@@ -19,7 +19,9 @@ const AdminBase = () => {
           </div>
           <div className="nav">
             <div className="nav-item">Home</div>
-            <div className="nav-item">Order</div>
+            <div className="nav-item" onClick={() => setMode(52)}>
+              Order
+            </div>
             <div className="nav-item">
               History
               <div className="nav-dropdown">

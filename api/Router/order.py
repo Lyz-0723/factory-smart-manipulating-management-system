@@ -2,13 +2,22 @@ from fastapi import APIRouter, Depends
 from typing import Annotated
 from Authentication.JWTtoken import get_current_user
 from Repository.CommonCRUD import check_user, check_order_belonger, check_order_existence, check_order_values, check_item
-from Repository.OrderCRUD import get_self_orders, get_self_spec_order, get_self_spec_status_orders, make_self_new_order, modify_self_spec_order, withdraw_spec_order  
+from Repository.OrderCRUD import get_all_orders, get_self_orders, get_self_spec_order, get_self_spec_status_orders, make_self_new_order, modify_self_spec_order, withdraw_spec_order  
 from exception import no_such_user, no_such_order, action_forbidden, bad_request, no_such_item
 
 from Schema.user import GetUser
 from Schema.order import BaseOrder, GetOrder
 
 router = APIRouter(prefix="/order", tags=["Order"])
+
+@router.get("/all")
+async def get_orders(current_user: Annotated[GetUser, Depends(get_current_user)]) -> list[GetOrder]:
+  """The endpoint of getting self orders"""
+  if not current_user.is_admin:
+    raise action_forbidden
+  
+  return await get_all_orders()
+
 
 @router.get("/")
 async def get_orders(current_user: Annotated[GetUser, Depends(get_current_user)]) -> list[GetOrder]:
