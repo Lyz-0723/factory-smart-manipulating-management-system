@@ -1,0 +1,661 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles and variables */
+:root {
+  --neutral-0: #fff;
+  --neutral-1: #eff2f6;
+  --neutral-2: #dee5ed;
+  --neutral-6: #9cb0c9;
+  --neutral-7: #8ca2c0;
+  --neutral-8: #7b95b7;
+  --neutral-10: #486284;
+  --cool-gray-70: #4d5358;
+}
+
+/* Container styles */
+.container {
+  background-color: var(--neutral-0);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styles */
+.header {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--neutral-2);
+  background-color: var(--neutral-0);
+  display: flex;
+  gap: 20px;
+  padding: 12px 98px 12px 99px;
+}
+
+/* Responsive header styles */
+@media (max-width: 991px) {
+  .header {
+    max-width: 100%;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+}
+
+/* Logo and brand name styles */
+.logo-container {
+  display: flex;
+  gap: 1px;
+  margin: auto 0;
+}
+
+.logo {
+  aspect-ratio: 1.14;
+  object-fit: contain;
+  object-position: center;
+  width: 25px;
+  fill: var(--cool-gray-70);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.brand-name {
+  color: var(--neutral-8);
+  letter-spacing: 0.15px;
+  align-self: start;
+  white-space: nowrap;
+  font: 700 20px/120% DM Sans, sans-serif;
+}
+
+/* Responsive brand name styles */
+@media (max-width: 991px) {
+  .brand-name {
+    white-space: initial;
+  }
+}
+
+/* Navigation styles */
+.nav {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+}
+
+/* Responsive navigation styles */
+@media (max-width: 991px) {
+  .nav {
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Navigation item styles */
+.nav-item {
+  color: var(--neutral-10);
+  text-align: center;
+  letter-spacing: 0.5px;
+  align-self: center;
+  margin: auto 0;
+  font: 400 16px/150% DM Sans, sans-serif;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--neutral-0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .nav-item:hover .nav-dropdown {
+    display: block;
+  }
+
+  .nav-dropdown-item {
+    padding: 15px;
+    color: var(--neutral-10);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .nav-dropdown-item:hover {
+    background-color: var(--neutral-1);
+  }
+
+/* Order button styles */
+.order-btn {
+  color: var(--neutral-0);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  justify-content: center;
+  border-radius: 50px;
+  border: 1px solid var(--neutral-10);
+  background-color: var(--neutral-10);
+  align-self: stretch;
+  flex-grow: 1;
+  padding: 12px 20px;
+  font: 400 16px/150% DM Sans, sans-serif;
+  cursor: pointer;
+}
+
+/* Responsive order button styles */
+@media (max-width: 991px) {
+  .order-btn {
+    white-space: initial;
+  }
+}
+
+/* Main content styles */
+.main-content {
+  justify-content: center;
+  align-self: center;
+  margin-top: 106px;
+  width: 1044px;
+  padding-right: 40px;
+}
+
+/* Responsive main content styles */
+@media (max-width: 991px) {
+  .main-content {
+    max-width: 100%;
+    padding-right: 20px;
+    margin-top: 40px;
+  }
+}
+
+/* Main section styles */
+.main-section {
+  gap: 20px;
+  display: flex;
+}
+
+/* Responsive main section styles */
+@media (max-width: 991px) {
+  .main-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+
+/* Image column styles */
+.image-column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 48%;
+  margin-left: 0px;
+}
+
+/* Responsive image column styles */
+@media (max-width: 991px) {
+  .image-column {
+    width: 100%;
+  }
+}
+
+/* Image container styles */
+.image-container {
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 24px;
+  background-color: var(--neutral-1);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+
+/* Responsive image container styles */
+@media (max-width: 991px) {
+  .image-container {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+/* Main image styles */
+.main-image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: auto;
+  fill: var(--neutral-6);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Text column styles */
+.text-column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 52%;
+  margin-left: 120px;
+}
+
+/* Responsive text column styles */
+@media (max-width: 991px) {
+  .text-column {
+    width: 100%;
+  }
+}
+
+/* Text container styles */
+.text-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+/* Responsive text container styles */
+@media (max-width: 991px) {
+  .text-container {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+/* Text section styles */
+.text-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive text section styles */
+@media (max-width: 991px) {
+  .text-section {
+    max-width: 100%;
+  }
+}
+
+/* Title styles */
+.title {
+  color: var(--neutral-10);
+  letter-spacing: 0.15px;
+  font: 500 21px/105% DM Sans, sans-serif;
+}
+
+/* Responsive title styles */
+@media (max-width: 991px) {
+  .title {
+    max-width: 100%;
+  }
+}
+
+/* Subtitle styles */
+.subtitle {
+  color: var(--neutral-10);
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  font: 700 60px/127% DM Sans, sans-serif;
+}
+
+/* Responsive subtitle styles */
+@media (max-width: 991px) {
+  .subtitle {
+    max-width: 100%;
+    font-size: 40px;
+  }
+}
+
+/* Description styles */
+.description {
+  color: var(--neutral-7);
+  letter-spacing: 0.15px;
+  margin-top: 24px;
+  font: 400 18px/140% DM Sans, sans-serif;
+}
+
+/* Responsive description styles */
+@media (max-width: 991px) {
+  .description {
+    max-width: 100%;
+    font-size: 16px;
+  }
+}
+
+/* Call-to-action button styles */
+.cta-btn {
+  color: var(--neutral-0);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  justify-content: center;
+  border-radius: 50px;
+  border: 1px solid var(--neutral-10);
+  background-color: var(--neutral-10);
+  align-self: flex-start;
+  padding: 14px 32px;
+  margin-top: 32px;
+  font: 700 16px/150% DM Sans, sans-serif;
+  cursor: pointer;
+}
+
+/* Responsive call-to-action button styles */
+@media (max-width: 991px) {
+  .cta-btn {
+    white-space: initial;
+  }
+}
+
+.movie-showcase {
+  background-color: var(--neutral-0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+  overflow: hidden; /* 隱藏水平滾動條 */
+  position: relative;
+}
+
+/* Movie section styles */
+.movie-section {
+  display: flex;
+  overflow-x: hidden; /* 隱藏橫向滾動條 */
+  gap: 20px;
+  padding: 80px; 
+  position: relative; /* 將 position 設定為相對位置 */
+}
+
+/* Updated Movie column styles */
+.movie-column {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 60%;
+  position: relative;
+  background-color: var(--neutral-0);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Updated Movie container styles */
+.movie-container {
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  max-width: 88%; /* 將 max-width 移到這裡 */
+}
+
+/* Responsive movie container styles */
+@media (max-width: 991px) {
+  .movie-column {
+    width: 100%;
+  }
+
+  .movie-container {
+    max-width: 100%;
+  }
+}
+
+/* Dot container styles */
+.dot-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Dot styles */
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--cool-gray-70);
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 8px; /* 設定點點之間的距離 */
+}
+
+.dot.active {
+  background-color: var(--neutral-10);
+}
+
+.nav-arrow {
+  position: absolute;
+  font-size: 24px;
+  color: var(--cool-gray-70);
+  background-color: var(--neutral-0);
+  border: 2px solid var(--cool-gray-70);
+  border-radius: 50%; /* 整體圓形 */
+  cursor: pointer;
+  width: 30px; /* 確保寬和高相等，以創建正圓 */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Left arrow position */
+.nav-arrow.left {
+  position: absolute;
+  font-size: 24px;
+  color: var(--cool-gray-70);
+  background-color: var(--neutral-0);
+  border: 2px solid var(--cool-gray-70);
+  border-radius: 50%; /* 整體圓形 */
+  cursor: pointer;
+  transform: translateY(-50%) translateX(50%);
+  left: 50%;
+  left: 150px; /* 距離左邊的距離 */
+  bottom: 50%; /* 距離底部的距離 */
+  width: 30px; /* 確保寬和高相等，以創建正圓 */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right arrow position */
+.nav-arrow.right {
+  position: absolute;
+  font-size: 24px;
+  color: var(--cool-gray-70);
+  background-color: var(--neutral-0);
+  border: 2px solid var(--cool-gray-70);
+  border-radius: 50%; /* 整體圓形 */
+  cursor: pointer;
+  transform: translateY(-50%) translateX(50%);
+  right: 50%;
+  right: 150px; /* 距離右邊的距離 */
+  bottom: 50%; /* 距離底部的距離 */
+  width: 30px; /* 確保寬和高相等，以創建正圓 */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 滑鼠懸停時顯示箭頭 */
+.movie-showcase:hover .nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 響應式箭頭大小 */
+@media (max-width: 991px) {
+  .nav-arrow {
+    font-size: 18px;
+  }
+}
+
+/* Responsive movie container styles */
+@media (max-width: 991px) {
+  .movie-container {
+    max-width: 100%;
+  }
+}
+
+/* Movie image styles */
+.movie-image {
+  aspect-ratio: 1;
+  object-fit: cover; 
+  object-position: center;
+  width: 100%;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 16px; 
+  height: 300px;
+}
+
+/* Separator line with more distance */
+.separator-line {
+  width: 100%;
+  height: 2px; /* 調整線條高度 */
+  background-color: var(--neutral-8);
+  margin: 120px 0; /* 調整上下邊距，使之與其他元素有間距 */
+}
+
+/* Footer styles */
+.footer {
+  background-color: var(--neutral-0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* Footer logo styles */
+.footer-logo {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 50px;
+  fill: var(--cool-gray-70);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Footer text styles */
+.footer-text {
+  color: var(--neutral-10);
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  font: 400 16px/150% DM Sans, sans-serif;
+}
+
+/* Footer link styles */
+.footer-link {
+  color: var(--neutral-10);
+  letter-spacing: 0.5px;
+  margin-top: 16px;
+  font: 700 18px/150% DM Sans, sans-serif;
+  text-decoration: none;
+}
+
+/* Social icons styles */
+.social-icons {
+  margin-top: 32px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Social icon styles */
+.social-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  fill: var(--cool-gray-70);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Additional section styles */
+.additional-section {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 垂直居中元素 */
+  margin: 80px 0; /* 調整上下邊距，使之與其他元素有間距 */
+}
+
+/* Additional column styles */
+.additional-column {
+  width: calc(20% - 20px); /* Further reduced width for smaller boxes */
+  margin: 0 40px; /* Adjusted margin to bring boxes inward */
+}
+
+/* Additional box styles */
+.additional-box {
+  border: 2px solid #486284;
+  border-radius: 16px;
+  background-color: #fff;
+  padding: 15px; /* Adjusted padding for smaller boxes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 120px; /* Further reduced height for smaller boxes */
+}
+
+/* Additional title styles */
+.additional-title {
+  color: #486284;
+  letter-spacing: 0.15px;
+  font: 700 18px/120% DM Sans, sans-serif;
+  text-align: center;
+}
+
+/* Additional content styles */
+.additional-content {
+  color: #2e3e54;
+  letter-spacing: 0.15px;
+  margin-top: 16px;
+  font: 400 16px/140% DM Sans, sans-serif;
+  text-align: center;
+}
+
+/* Responsive additional section styles */
+@media (max-width: 991px) {
+  .additional-section {
+    flex-direction: column;
+    align-items: center; /* Center the boxes horizontally and vertically for smaller screens */
+  }
+
+  .additional-column {
+    width: 80%; /* Adjust the width for smaller screens */
+    margin-bottom: 20px;
+  }
+
+  /* Adjusted height for smaller screens */
+  .additional-box {
+    height: auto;
+    width: 100%; /* Make the boxes full-width on smaller screens */
+  }
+}
+
+
+.signOutButton {
+  position: fixed;
+  width: auto;
+  height: auto;
+  color: red;
+  font-size: 250%;
+  background-color: #282c34;
+  height: auto;
+  padding: 1%;
+  bottom: 5%;
+  border: 3px white solid;
+  border-radius: 999em;
+  left: 3%;
+}

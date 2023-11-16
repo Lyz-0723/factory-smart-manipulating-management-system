@@ -25,7 +25,7 @@ async def get_self_spec_status_orders(user_id: int, status: int) -> list[GetOrde
 
 async def make_self_new_order(new_order: BaseOrder) -> None:
   """Making new order actions with db"""
-  stmt = Orders.inset().values(total_amount=new_order.total_amount,
+  stmt = Orders.insert().values(total_amount=new_order.total_amount,
                                status=new_order.status,
                                create_date=new_order.create_date,
                                payment_method=new_order.payment_method,

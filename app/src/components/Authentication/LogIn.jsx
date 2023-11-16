@@ -7,7 +7,7 @@ import get_access_token from "../../requests/login";
 import { get_self_detail } from "../../requests/user";
 
 const LogIn = () => {
-  let { setMode, setLogOutBtn, setUser } = useContext(AppContext);
+  let { setMode, setLogOutBtn, setUser, setLoading } = useContext(AppContext);
 
   const log_in = async () => {
     const account = document.getElementById("inputAccount").value;
@@ -15,6 +15,7 @@ const LogIn = () => {
 
     if (account === "" || password === "") {
       console.log("Invalid input.");
+      setLoading(0);
       return;
     }
     const result = await get_access_token(account, password);
