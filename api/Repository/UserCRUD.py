@@ -3,6 +3,13 @@ from database import db, execute_stmt_in_tran
 from Schema.user import GetUser, BaseUser
 from Authentication.hashing import hashing_password
 
+async def get_all_users() -> list[GetUser]:
+  """Get all users actions with db"""
+  stmt = Users.select()
+
+  return await db.fetch_all(stmt)
+
+
 async def create_new_user(user: BaseUser):
   """Create new user actions with db"""
   stmt = Users.insert().values(user_name=user.user_name,

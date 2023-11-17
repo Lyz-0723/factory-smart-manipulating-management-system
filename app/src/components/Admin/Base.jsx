@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { AppContext } from "../../App";
 import AdminDashBoard from "./Dashboard/AdminDashboard";
@@ -8,6 +8,14 @@ import "../Base.css";
 
 const AdminBase = () => {
   let { mode, setMode } = useContext(AppContext);
+
+  const [allUser, setAllUser] = useState([]);
+
+  useEffect(() => {
+    const get_user = async () => {};
+
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div>

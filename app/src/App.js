@@ -13,11 +13,11 @@ export const AppContext = createContext(null);
 function App() {
   const isLogIn = window.localStorage.getItem("isLogIn");
   const [mode, setMode] = useState(0);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(0);
   const [logOutBtn, setLogOutBtn] = useState(
     window.localStorage.getItem("isLogIn") === "true" ? true : false
   );
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(0);
 
   const logOut = () => {
     window.localStorage.setItem("access_token", null);

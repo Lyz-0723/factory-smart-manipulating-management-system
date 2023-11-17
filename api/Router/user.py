@@ -2,13 +2,23 @@ from fastapi import APIRouter, Depends
 from typing import Annotated
 from Authentication.JWTtoken import get_current_user
 from Authentication.hashing import hashing_password
-from Repository.UserCRUD import get_spec_user, create_new_user, modify_spec_user
+from Repository.UserCRUD import get_all_users, get_spec_user, create_new_user, modify_spec_user
 from Repository.CommonCRUD import check_user_name
 
 from Schema.user import BaseUser, GetUser
-from exception import duplicate_data, bad_request
+from exception import duplicate_data, bad_request, action_forbidden
 
 router = APIRouter(prefix="/user", tags=["User"])
+
+@router.get("/all")
+async def get_users(current_user: Annotated[GetUser, Depends(get_current_user)]) -> list[GetUser]:
+  """The endpoint of getting all users data"""
+
+  if not current_user.is_admin:
+     raise action_forbidden
+  
+  return await get_all_users()
+
 
 @router.post("/")
 async def create_user(user: BaseUser) -> None:
