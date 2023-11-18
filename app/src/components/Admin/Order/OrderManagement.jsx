@@ -91,9 +91,10 @@ const OrderManagement = () => {
                 <th>訂購數量</th>
                 <th>總共金額</th>
                 <th>出貨情況</th>
-                <th>備註</th>
+                <th>付款方式</th>
               </tr>
             </thead>
+            
             <tbody>
               {allOrders.length !== 0 &&
                 allOrders.map((order) => (
