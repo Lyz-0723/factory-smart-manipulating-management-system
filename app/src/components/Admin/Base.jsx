@@ -3,7 +3,10 @@ import React, { useContext, useEffect, useState, createContext } from "react";
 import { AppContext } from "../../App";
 import AdminDashBoard from "./Dashboard/AdminDashboard";
 import OrderManagement from "./Order/OrderManagement";
-import get_all_users, { get_all_items } from "../../requests/Admin/data";
+import get_all_users, {
+  get_all_items,
+  get_order_status,
+} from "../../requests/Admin/data";
 import Loading from "../Common/Loading";
 
 import "../Base.css";
@@ -15,15 +18,23 @@ const AdminBase = () => {
 
   const [allUser, setAllUser] = useState([]);
   const [allItem, setAllItem] = useState([]);
+  const [allOrderStatus, setAllOrderStatus] = useState([]);
 
   useEffect(() => {
     const get_user = async () => {
       setLoading(2);
       const all_users = await get_all_users();
       const all_items = await get_all_items();
-      if (all_users.length !== 0 && all_items.length !== 0) {
+      const all_order_status = await get_order_status();
+
+      if (
+        all_users.length !== 0 &&
+        all_items.length !== 0 &&
+        all_order_status.length !== 0
+      ) {
         setAllUser(all_users);
         setAllItem(all_items);
+        setAllOrderStatus(all_order_status);
         setLoading(0);
       } else {
         setAllUser([]);
@@ -35,7 +46,7 @@ const AdminBase = () => {
   }, []);
 
   return (
-    <AdminContext.Provider value={{ allUser, allItem }}>
+    <AdminContext.Provider value={{ allUser, allItem, allOrderStatus }}>
       {loading !== 2 && (
         <div className="container">
           <div className="header">
