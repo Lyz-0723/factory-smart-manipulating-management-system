@@ -35,11 +35,12 @@ const AdminBase = () => {
         setAllUser(all_users);
         setAllItem(all_items);
         setAllOrderStatus(all_order_status);
-        setLoading(0);
       } else {
         setAllUser([]);
         setAllItem([]);
+        setAllOrderStatus([]);
       }
+      setLoading(0);
     };
     get_user();
     // eslint-disable-next-line

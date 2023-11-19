@@ -99,3 +99,29 @@ export const modify_order_status = async (value, order_id) => {
     console.error("Error fetching access token:", error);
   }
 };
+
+export const get_all_orders = async () => {
+  // Get self user order history
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(`${path}/order/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { get_all_orders } from "../../../requests/Normal/Order";
+import { get_all_orders } from "../../../requests/Admin/data";
 
 import "./OrderManagement.css";
 import { AdminContext } from "../Base";

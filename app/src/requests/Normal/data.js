@@ -27,39 +27,12 @@ export const get_order_history = async () => {
 };
 export default get_order_history;
 
-export const get_self_orders = async () => {
-  // Get self user order history
-
+export const get_self_user = async () => {
+  // Get self user detail
   const token = window.localStorage.getItem("access_token");
 
   try {
-    const response = await fetch(`${path}/order/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Authentication failed");
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching access token:", error);
-  }
-};
-
-export const get_all_orders = async () => {
-  // Get self user order history
-
-  const token = window.localStorage.getItem("access_token");
-
-  try {
-    const response = await fetch(`${path}/order/all`, {
+    const response = await fetch(`${path}/user/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
