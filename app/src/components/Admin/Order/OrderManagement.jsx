@@ -92,9 +92,10 @@ const OrderManagement = () => {
                 <th>總共金額</th>
                 <th>出貨情況</th>
                 <th>付款方式</th>
+                <th>備註</th>
               </tr>
             </thead>
-            
+
             <tbody>
               {allOrders.length !== 0 &&
                 allOrders.map((order) => (
@@ -121,6 +122,7 @@ const OrderManagement = () => {
                         ))}
                       </select>
                     </td>
+                    <td>{order.payment_method}</td>
                     <td>{order.customize_details}</td>
                   </tr>
                 ))}

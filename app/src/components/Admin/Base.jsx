@@ -10,6 +10,7 @@ import get_all_users, {
 import Loading from "../Common/Loading";
 
 import "../Base.css";
+import EnvironmentMonitor from "./Environment/EnvironmentPage";
 
 export const AdminContext = createContext(null);
 
@@ -62,12 +63,8 @@ const AdminBase = () => {
               <div className="nav-item" onClick={() => setMode(52)}>
                 Order
               </div>
-              <div className="nav-item">
-                History
-                <div className="nav-dropdown">
-                  <div className="nav-dropdown-item">Modify the Order</div>
-                  <div className="nav-dropdown-item">Online payment</div>
-                </div>
+              <div className="nav-item" onClick={() => setMode(53)}>
+                Environment
               </div>
               <div className="nav-item">Account</div>
               <div className="order-btn">Contact us</div>
@@ -75,6 +72,8 @@ const AdminBase = () => {
           </div>
           {mode === 51 && <AdminDashBoard />}
           {mode === 52 && <OrderManagement />}
+          {mode === 53 && <EnvironmentMonitor />}
+
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}
             <div className="footer-text">
