@@ -78,7 +78,6 @@ export const send_new_order = async (
     pay_date: null,
     status: 1,
   };
-  console.log(body);
 
   try {
     const response = await fetch(`${path}/order/`, {
@@ -95,8 +94,43 @@ export const send_new_order = async (
       throw new Error("Authentication failed");
     }
 
-    const data = await response.json();
-    return data;
+    return true;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};
+
+export const modify_user_detail = async (
+  user_name,
+  company_info,
+  contact_info,
+  password
+) => {
+  // Modify user informations
+  const token = window.localStorage.getItem("access_token");
+
+  let body = {};
+  if (user_name) body["user_name"] = user_name;
+  if (company_info) body["company_info"] = company_info;
+  if (contact_info !== ":") body["contact_info"] = contact_info;
+  if (password) body["password"] = password;
+
+  try {
+    const response = await fetch(`${path}/user/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    return true;
   } catch (error) {
     console.error("Error fetching access token:", error);
   }

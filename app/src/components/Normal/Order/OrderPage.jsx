@@ -14,19 +14,22 @@ const OrderPage = () => {
       ":" +
       document.getElementById("customize_detail_print").value;
     const order_item_id = document.getElementById("order_item").value;
-    send_new_order(
-      total_amount,
-      payment_method,
-      customize_detail,
-      user.user_id,
-      order_item_id
-    );
+    if (
+      await send_new_order(
+        total_amount,
+        payment_method,
+        customize_detail,
+        user.user_id,
+        order_item_id
+      )
+    )
+      alert("Successfully ordered!");
   };
 
   return (
     <div className="order-page-container">
       <div className="form-container">
-        <form className="custom-form" action="process_form.php" method="post">
+        <form className="custom-form" method="post">
           <h2 className="form-title">Product Order Form</h2>
 
           <label className="form-label" htmlFor="order_item">
@@ -112,57 +115,6 @@ const OrderPage = () => {
         </form>
 
         <hr className="form-divider" />
-
-        <form
-          className="custom-form"
-          action="process_contact.php"
-          method="post"
-        >
-          <h2 className="form-title">Contact Customer Service</h2>
-          <label className="form-label" htmlFor="customer_name">
-            Your Name:
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            name="customer_name"
-            required
-          />
-
-          <label className="form-label" htmlFor="customer_email">
-            Your Email:
-          </label>
-          <input
-            className="form-input"
-            type="email"
-            name="customer_email"
-            required
-          />
-
-          <label className="form-label" htmlFor="customer_email">
-            Your Email:
-          </label>
-          <input
-            className="form-input"
-            type="email"
-            name="customer_email"
-            required
-          />
-
-          <label className="form-label" htmlFor="message">
-            Message:
-          </label>
-          <textarea
-            className="form-textarea"
-            name="message"
-            rows="4"
-            required
-          ></textarea>
-
-          <button className="form-button" type="submit">
-            Contact Customer Service
-          </button>
-        </form>
       </div>
     </div>
   );

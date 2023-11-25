@@ -4,6 +4,8 @@ import { AppContext } from "../../App";
 import NormalDashBoard from "./Dashboard/NormalDashboard";
 import OrderHistory from "./Order/OrderHistory";
 import OrderPage from "./Order/OrderPage";
+import ContactPage from "./Contact/ContactPage";
+import AccountManagement from "./Account/AccountManagement";
 import "../Base.css";
 import Loading from "../Common/Loading";
 import { get_all_items, get_order_status } from "../../requests/Admin/data";
@@ -70,20 +72,26 @@ const NormalBase = () => {
                   <div className="nav-dropdown-item">Online payment</div>
                 </div>
               </div>
-              <div className="nav-item">
+              {/* <div className="nav-item">
                 History
-                {/* <div className="nav-dropdown">
+                <div className="nav-dropdown">
                   <div className="nav-dropdown-item">Modify the Order</div>
                   <div className="nav-dropdown-item">Online payment</div>
-                </div> */}
+                </div>
+              </div> */}
+              <div className="nav-item" onClick={() => setMode(5)}>
+                Account
               </div>
-              <div className="nav-item">Account</div>
-              <div className="order-btn">Contact us</div>
+              <div className="order-btn" onClick={() => setMode(4)}>
+                Contact us
+              </div>
             </div>
           </div>
           {mode === 1 && <NormalDashBoard />}
           {mode === 2 && <OrderHistory />}
           {mode === 3 && <OrderPage />}
+          {mode === 4 && <ContactPage />}
+          {mode === 5 && <AccountManagement />}
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}
             <div className="footer-text">

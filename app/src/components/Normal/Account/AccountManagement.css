@@ -1,4 +1,4 @@
-.order-page-container {
+.account-management-page-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,6 @@
 }
 
 .form-input,
-.form-textarea,
 .form-datetime,
 .form-select {
   width: 100%;
