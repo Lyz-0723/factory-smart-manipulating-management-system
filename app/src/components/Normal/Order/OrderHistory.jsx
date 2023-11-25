@@ -47,6 +47,7 @@ const OrderHistory = () => {
       }
     };
     get_orders();
+    // eslint-disable-next-line
   }, []);
 
   return (

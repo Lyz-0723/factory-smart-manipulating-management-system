@@ -122,7 +122,7 @@ CREATE TABLE Orders
     FOREIGN KEY (status) REFERENCES Order_Status (status_id),
     create_date       DATE        NOT NULL,
     payment_method    VARCHAR(30) NOT NULL,
-    pay_date          DATE        NOT NULL,
+    pay_date          DATE        DEFAULT NULL,
     customize_details VARCHAR(60),
     ordered_user_id   INT         NOT NULL,
     FOREIGN KEY (ordered_user_id) REFERENCES Users (user_id),

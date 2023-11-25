@@ -42,11 +42,11 @@ INSERT INTO Machines (serial_number, machine_usage, position, status, script, pl
 
 -- Orders table
 INSERT INTO Orders (total_amount, status, create_date, payment_method, pay_date, customize_details, ordered_user_id, ordered_item_id) VALUES
-(100, 2, '2023-10-15', 'Debit Card', '2023-10-16 00:00:00', 'red:CB:1', 2, 1),
-(150, 2, '2023-10-15', 'Credit Card', '2023-10-16 03:00:00', 'black:CB:2', 2, 2),
-(120, 2, '2023-10-15', 'Credit Card', '2023-10-16 06:00:00', 'black::2', 3, 3),
-(80, 1, '2023-10-15', 'Check', '2023-10-16 09:00:00', 'red:CD:1', 4, 4),
-(200, 2, '2023-10-15', 'Check', '2023-10-16 12:00:00', 'blzzxxxxxue:CE:1', 5, 5);
+(100, 2, '2023-10-15', 'Debit Card', '2023-10-16 00:00:00', 'red:CB', 2, 1),
+(150, 2, '2023-10-15', 'Credit Card', '2023-10-16 03:00:00', 'black:CB', 2, 2),
+(120, 2, '2023-10-15', 'Credit Card', '2023-10-16 06:00:00', 'black:', 3, 3),
+(80, 1, '2023-10-15', 'Check', '2023-10-16 09:00:00', 'red:CD', 4, 4),
+(200, 2, '2023-10-15', 'Check', '2023-10-16 12:00:00', 'blue:CE', 5, 5);
 
 -- Environment table
 INSERT INTO Environment (temperature, humidity, pressure, vibration, chemical_concentration, noise, record_time) VALUES

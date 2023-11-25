@@ -3,6 +3,7 @@ import React, { useContext, useEffect, createContext, useState } from "react";
 import { AppContext } from "../../App";
 import NormalDashBoard from "./Dashboard/NormalDashboard";
 import OrderHistory from "./Order/OrderHistory";
+import OrderPage from "./Order/OrderPage";
 import "../Base.css";
 import Loading from "../Common/Loading";
 import { get_all_items, get_order_status } from "../../requests/Admin/data";
@@ -60,6 +61,9 @@ const NormalBase = () => {
               <div className="nav-item">
                 Order
                 <div className="nav-dropdown">
+                  <div className="nav-dropdown-item" onClick={() => setMode(3)}>
+                    Make Order
+                  </div>
                   <div className="nav-dropdown-item" onClick={() => setMode(2)}>
                     Order history
                   </div>
@@ -79,17 +83,14 @@ const NormalBase = () => {
           </div>
           {mode === 1 && <NormalDashBoard />}
           {mode === 2 && <OrderHistory />}
+          {mode === 3 && <OrderPage />}
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}
             <div className="footer-text">
               © 2023 Your Brand. All rights reserved.
             </div>
-            <a href="#" className="footer-link">
-              Privacy Policy
-            </a>
-            <a href="#" className="footer-link">
-              Terms of Service
-            </a>
+            <button className="footer-link">Privacy Policy</button>
+            <button className="footer-link">Terms of Service</button>
             <div className="social-icons">
               {/* <img src="facebook-icon.svg" alt="Facebook" className="social-icon"> */}
               {/* <img src="twitter-icon.svg" alt="Twitter" className="social-icon"> */}

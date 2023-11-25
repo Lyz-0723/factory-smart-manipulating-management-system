@@ -51,3 +51,53 @@ export const get_self_user = async () => {
     console.error("Error fetching access token:", error);
   }
 };
+
+export const send_new_order = async (
+  total_amount,
+  payment_method,
+  customize_details,
+  ordered_user_id,
+  ordered_item_id
+) => {
+  // Send new order
+  const token = window.localStorage.getItem("access_token");
+  const today = new Date();
+
+  let body = {
+    total_amount: parseInt(total_amount),
+    payment_method: payment_method,
+    customize_details: customize_details,
+    ordered_user_id: ordered_user_id,
+    ordered_item_id: parseInt(ordered_item_id),
+    create_date:
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate(),
+    pay_date: null,
+    status: 1,
+  };
+  console.log(body);
+
+  try {
+    const response = await fetch(`${path}/order/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};
