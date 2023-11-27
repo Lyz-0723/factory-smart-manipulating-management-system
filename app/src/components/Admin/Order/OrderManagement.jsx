@@ -14,7 +14,7 @@ import {
 const OrderManagement = () => {
   let { loading, setLoading } = useContext(AppContext);
   let { allUser, allItem, allOrderStatus } = useContext(AdminContext);
-  const [allOrders, setAllOrders] = useState([]);
+  const [allOrders, setAllOrders] = useState(undefined);
 
   useEffect(() => {
     const get_orders = async () => {
@@ -56,7 +56,7 @@ const OrderManagement = () => {
       }
     };
     get_orders();
-  }, []);
+  }, [allItem, allOrderStatus, allUser, setLoading]);
 
   const change_order_status = async (status_name, order_id) => {
     setLoading(4);
@@ -74,7 +74,7 @@ const OrderManagement = () => {
 
   return (
     <div>
-      {loading !== 3 && (
+      {loading !== 3 && allOrders && (
         <>
           <table style={{ width: "100%" }}>
             {loading === 4 && (
@@ -137,7 +137,11 @@ const OrderManagement = () => {
           </p>
         </>
       )}
-      {loading === 3 && <Loading />}
+      {(loading === 3 ||
+        !allOrders ||
+        !allItem ||
+        !allOrderStatus ||
+        !allUser) && <Loading />}
     </div>
   );
 };
