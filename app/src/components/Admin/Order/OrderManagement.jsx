@@ -18,7 +18,6 @@ const OrderManagement = () => {
 
   useEffect(() => {
     const get_orders = async () => {
-      setLoading(3);
       const all_orders = await get_all_orders();
       let status_list = []; // Prevent pending data
       if (allOrderStatus.length === 0) {
@@ -52,7 +51,6 @@ const OrderManagement = () => {
           };
         });
         setAllOrders(complete_orders);
-        setLoading(0);
       }
     };
     get_orders();
@@ -63,6 +61,7 @@ const OrderManagement = () => {
     const status_id = allOrderStatus.find(
       (order) => order.status === status_name
     ).status_id;
+    console.log(status_id, order_id);
     if (await modify_order_status(status_id, order_id)) {
       const updatedOrders = allOrders.map((order) =>
         order.order_id === order_id ? { ...order, status: status_name } : order
@@ -76,58 +75,61 @@ const OrderManagement = () => {
     <div>
       {loading !== 3 && allOrders && (
         <>
-          <table style={{ width: "100%" }}>
-            {loading === 4 && (
-              <div className="componentLoading">
-                <Loading />
-              </div>
-            )}
-            <thead>
-              <tr style={{ backgroundColor: "#FFFFFF" }}>
-                <th>訂購人</th>
-                <th>訂單建立日期</th>
-                <th>付款日期</th>
-                <th>訂購商品</th>
-                <th>訂購數量</th>
-                <th>總共金額</th>
-                <th>出貨情況</th>
-                <th>付款方式</th>
-                <th>備註</th>
-              </tr>
-            </thead>
+          <div>
+            <table style={{ width: "100%" }}>
+              {loading === 4 && (
+                <div className="componentLoading">
+                  <Loading />
+                </div>
+              )}
+              <thead>
+                <tr style={{ backgroundColor: "#FFFFFF" }}>
+                  <th>訂購人</th>
+                  <th>訂單建立日期</th>
+                  <th>付款日期</th>
+                  <th>訂購商品</th>
+                  <th>訂購數量</th>
+                  <th>總共金額</th>
+                  <th>出貨情況</th>
+                  <th>付款方式</th>
+                  <th>備註</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {allOrders.length !== 0 &&
-                allOrders.map((order) => (
-                  <tr key={order.order_id}>
-                    <td>{order.ordered_user_name}</td>
-                    <td>{order.create_date}</td>
-                    <td>{order.pay_date}</td>
-                    <td>{order.ordered_item_name}</td>
-                    <td>{order.total_amount}</td>
-                    <td>
-                      {order.total_amount * order.ordered_item_unit_price}
-                    </td>
-                    <td>
-                      <select
-                        onChange={(e) =>
-                          change_order_status(e.target.value, order.order_id)
-                        }
-                        id={"order" + order.order_id}
-                        value={order.status}
-                      >
-                        <option disabled>請選擇狀態</option>
-                        {allOrderStatus.map((status) => (
-                          <option key={status.status}>{status.status}</option>
-                        ))}
-                      </select>
-                    </td>
-                    <td>{order.payment_method}</td>
-                    <td>{order.customize_details}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+              <tbody>
+                {allOrders.length !== 0 &&
+                  allOrders.map((order) => (
+                    <tr key={order.order_id}>
+                      <td>{order.ordered_user_name}</td>
+                      <td>{order.create_date}</td>
+                      <td>{order.pay_date}</td>
+                      <td>{order.ordered_item_name}</td>
+                      <td>{order.total_amount}</td>
+                      <td>
+                        {order.total_amount * order.ordered_item_unit_price}
+                      </td>
+                      <td>
+                        <select
+                          onChange={(e) =>
+                            change_order_status(e.target.value, order.order_id)
+                          }
+                          id={"order" + order.order_id}
+                          value={order.status}
+                        >
+                          <option disabled>請選擇狀態</option>
+                          {allOrderStatus.map((status) => (
+                            <option key={status.status}>{status.status}</option>
+                          ))}
+                        </select>
+                      </td>
+                      <td>{order.payment_method}</td>
+                      <td>{order.customize_details}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+
           <hr />
           <p className="topic" style={{ paddingLeft: "1%" }}>
             每月訂購量
@@ -137,11 +139,7 @@ const OrderManagement = () => {
           </p>
         </>
       )}
-      {(loading === 3 ||
-        !allOrders ||
-        !allItem ||
-        !allOrderStatus ||
-        !allUser) && <Loading />}
+      {(!allOrders || !allItem || !allOrderStatus || !allUser) && <Loading />}
     </div>
   );
 };

@@ -77,10 +77,9 @@ export const modify_order_status = async (value, order_id) => {
   // Change the order data
   const token = window.localStorage.getItem("access_token");
   const body = { status: value, order_id: order_id };
-  console.log(body);
 
   try {
-    const response = await fetch(`${path}/order`, {
+    const response = await fetch(`${path}/order/status/`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +90,7 @@ export const modify_order_status = async (value, order_id) => {
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     return true;
@@ -107,6 +106,32 @@ export const get_all_orders = async () => {
 
   try {
     const response = await fetch(`${path}/order/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};
+
+export const get_environment_datas = async () => {
+  // Get last ten envoronment datas
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(`${path}/env`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

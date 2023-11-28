@@ -56,7 +56,6 @@ export const send_new_order = async (
   total_amount,
   payment_method,
   customize_details,
-  ordered_user_id,
   ordered_item_id
 ) => {
   // Send new order to database
@@ -76,7 +75,6 @@ export const send_new_order = async (
     total_amount: parseInt(total_amount),
     payment_method: payment_method,
     customize_details: customize_details,
-    ordered_user_id: ordered_user_id,
     ordered_item_id: parseInt(ordered_item_id),
     create_date:
       today.getFullYear() +
@@ -85,7 +83,6 @@ export const send_new_order = async (
       "-" +
       today.getDate(),
     pay_date: null,
-    status: 1,
   };
 
   try {
