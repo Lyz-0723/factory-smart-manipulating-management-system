@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AdminContext } from "../Base";
 
 const AdminDashBoard = () => {
+  let { allItem } = useContext(AdminContext);
   return (
     <>
       <div className="main-content">
@@ -30,24 +32,14 @@ const AdminDashBoard = () => {
       <div className="separator-line"></div>
 
       <div className="additional-section">
-        <div className="additional-column">
-          <div className="additional-box">
-            <div className="additional-title">Item 1</div>
-            <div className="additional-content"></div>
+        {allItem.map((item) => (
+          <div className="additional-column" key={item.item_id}>
+            <div className="additional-box">
+              <div className="additional-title">{item.item_name}</div>
+              <div className="additional-content"></div>
+            </div>
           </div>
-        </div>
-        <div className="additional-column">
-          <div className="additional-box">
-            <div className="additional-title">Item 2</div>
-            <div className="additional-content"></div>
-          </div>
-        </div>
-        <div className="additional-column">
-          <div className="additional-box">
-            <div className="additional-title">Item 3</div>
-            <div className="additional-content"></div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="movie-showcase">

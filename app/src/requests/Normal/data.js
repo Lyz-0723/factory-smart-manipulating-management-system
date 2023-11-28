@@ -141,3 +141,51 @@ export const modify_user_detail = async (
     console.error("Error fetching access token:", error);
   }
 };
+
+export const modify_specific_order = async (
+  total_amount,
+  payment_method,
+  customize_details,
+  ordered_item_id,
+  order_id
+) => {
+  // Send new order to database
+  const token = window.localStorage.getItem("access_token");
+
+  // Check if the payment method correct
+  const payment_method_map = {
+    credit_card: "Credit Card",
+    debit_card: "Debit Card",
+    check: "Check",
+  };
+  if (!payment_method_map[payment_method]) return false;
+
+  // Set the request body
+  let body = {
+    total_amount: parseInt(total_amount),
+    payment_method: payment_method,
+    customize_details: customize_details,
+    ordered_item_id: parseInt(ordered_item_id),
+    order_id: order_id,
+  };
+
+  try {
+    const response = await fetch(`${path}/order/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};

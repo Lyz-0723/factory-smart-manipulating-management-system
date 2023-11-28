@@ -4,7 +4,7 @@ import { NormalContext } from "../Base";
 import { send_new_order } from "../../../requests/Normal/data";
 
 const OrderPage = () => {
-  let { allItem, user } = useContext(NormalContext);
+  let { allItem } = useContext(NormalContext);
 
   const make_order = async () => {
     const total_amount = document.getElementById("total_amount").value;
@@ -19,7 +19,6 @@ const OrderPage = () => {
         total_amount,
         payment_method,
         customize_detail,
-        user.user_id,
         order_item_id
       )
     )

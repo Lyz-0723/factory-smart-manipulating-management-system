@@ -52,7 +52,9 @@ const NormalBase = () => {
           <div className="header">
             <div className="logo-container">
               {/* <img src="logo.svg" alt="Logo" className="logo"> */}
-              <div className="brand-name">iFactory</div>
+              <div className="brand-name" onClick={() => setMode(1)}>
+                iFactory
+              </div>
             </div>
             <div className="nav">
               <div className="nav-item" onClick={() => setMode(1)}>
@@ -98,9 +100,39 @@ const NormalBase = () => {
             <button className="footer-link">Privacy Policy</button>
             <button className="footer-link">Terms of Service</button>
             <div className="social-icons">
-              {/* <img src="facebook-icon.svg" alt="Facebook" className="social-icon"> */}
-              {/* <img src="twitter-icon.svg" alt="Twitter" className="social-icon"> */}
-              {/* <img src="instagram-icon.svg" alt="Instagram" className="social-icon"> */}
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://louisville.edu/mcconnellcenter/images/facebook_logos_PNG19748.png/image"
+                  alt="Facebook"
+                  className="social-icon"
+                />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/X_icon_2.svg/2048px-X_icon_2.svg.png"
+                  alt="Twitter"
+                  className="social-icon"
+                />
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
+                  alt="Instagram"
+                  className="social-icon"
+                />
+              </a>
             </div>
           </div>
         </div>
