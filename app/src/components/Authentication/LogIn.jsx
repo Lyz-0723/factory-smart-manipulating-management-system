@@ -10,6 +10,7 @@ const LogIn = () => {
   let { setMode, setLogOutBtn, setUser, setLoading } = useContext(AppContext);
 
   const log_in = async () => {
+    setLoading(1);
     const account = document.getElementById("inputAccount").value;
     const password = document.getElementById("inputPassword").value;
 

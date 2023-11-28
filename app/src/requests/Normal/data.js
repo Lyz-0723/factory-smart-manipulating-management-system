@@ -59,10 +59,19 @@ export const send_new_order = async (
   ordered_user_id,
   ordered_item_id
 ) => {
-  // Send new order
+  // Send new order to database
   const token = window.localStorage.getItem("access_token");
   const today = new Date();
 
+  // Check if the payment method correct
+  const payment_method_map = {
+    credit_card: "Credit Card",
+    debit_card: "Debit Card",
+    check: "Check",
+  };
+  if (!payment_method_map[payment_method]) return false;
+
+  // Set the request body
   let body = {
     total_amount: parseInt(total_amount),
     payment_method: payment_method,
@@ -106,7 +115,7 @@ export const modify_user_detail = async (
   contact_info,
   password
 ) => {
-  // Modify user informations
+  // Modify user self informations
   const token = window.localStorage.getItem("access_token");
 
   let body = {};

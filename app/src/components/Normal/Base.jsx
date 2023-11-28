@@ -14,14 +14,13 @@ import { get_self_detail } from "../../requests/user";
 export const NormalContext = createContext(null);
 
 const NormalBase = () => {
-  let { mode, setMode, loading, setLoading } = useContext(AppContext);
-  const [user, setUser] = useState({});
-  const [allItem, setAllItem] = useState([]);
-  const [allOrderStatus, setAllOrderStatus] = useState([]);
+  let { mode, setMode } = useContext(AppContext);
+  const [user, setUser] = useState(undefined);
+  const [allItem, setAllItem] = useState(undefined);
+  const [allOrderStatus, setAllOrderStatus] = useState(undefined);
 
   useEffect(() => {
     const get_data = async () => {
-      setLoading(2);
       const all_items = await get_all_items();
       const all_order_status = await get_order_status();
       const self_user = await get_self_detail();
@@ -34,7 +33,6 @@ const NormalBase = () => {
         setUser(self_user);
         setAllItem(all_items);
         setAllOrderStatus(all_order_status);
-        setLoading(0);
       } else {
         setUser({});
         setAllItem([]);
@@ -49,7 +47,7 @@ const NormalBase = () => {
     <NormalContext.Provider
       value={{ user, allItem, setAllItem, allOrderStatus, setAllOrderStatus }}
     >
-      {loading !== 2 && (
+      {user && allItem && allOrderStatus && (
         <div className="container">
           <div className="header">
             <div className="logo-container">
@@ -107,7 +105,7 @@ const NormalBase = () => {
           </div>
         </div>
       )}
-      {loading === 2 && (
+      {(!user || !allItem || !allOrderStatus) && (
         <div className="baseLoading">
           <Loading />
         </div>

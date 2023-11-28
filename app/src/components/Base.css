@@ -564,6 +564,8 @@ body {
   margin-top: 16px;
   font: 700 18px/150% DM Sans, sans-serif;
   text-decoration: none;
+  background-color: white;
+  border: none;
 }
 
 /* Social icons styles */

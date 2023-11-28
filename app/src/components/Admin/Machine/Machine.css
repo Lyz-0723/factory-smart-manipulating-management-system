@@ -1,0 +1,59 @@
+.container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.machine-selector,
+.machine-image-container,
+.machine-status-table,
+.added-machines,
+.navigation {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.added-machines table {
+  margin-top: 20px;
+  display: none;
+}
+
+.toggle-button {
+  margin-top: 10px;
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.emergency-stop-button,
+.status-management-link {
+  margin-top: 10px;
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.machine-image {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

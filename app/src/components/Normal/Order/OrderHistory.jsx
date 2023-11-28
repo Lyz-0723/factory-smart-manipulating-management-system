@@ -3,17 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import get_order_history from "../../../requests/Normal/data";
 import { get_order_status } from "../../../requests/Admin/data";
 import { NormalContext } from "../Base";
-import { AppContext } from "../../../App";
 import Loading from "../../Common/Loading";
 
 const OrderHistory = () => {
-  let { loading, setLoading } = useContext(AppContext);
   let { allItem, allOrderStatus } = useContext(NormalContext);
-  const [selfOrders, setSelfOrders] = useState([]);
+  const [selfOrders, setSelfOrders] = useState(undefined);
 
   useEffect(() => {
     const get_orders = async () => {
-      setLoading(3);
       const self_orders = await get_order_history();
       let status_list = []; // Prevent pending data
       if (allOrderStatus.length === 0) {
@@ -43,7 +40,6 @@ const OrderHistory = () => {
           };
         });
         setSelfOrders(complete_orders);
-        setLoading(0);
       }
     };
     get_orders();
@@ -52,18 +48,13 @@ const OrderHistory = () => {
 
   return (
     <div>
-      {loading !== 3 && (
+      {selfOrders && (
         <>
           <div>
-            Overview
+            <p>Overview</p>
             <button>Payment</button>
           </div>
           <table style={{ width: "100%" }}>
-            {loading === 4 && (
-              <div className="componentLoading">
-                <Loading />
-              </div>
-            )}
             <thead>
               <tr
                 style={{
@@ -84,7 +75,7 @@ const OrderHistory = () => {
               {selfOrders.length !== 0 &&
                 selfOrders.map((order) => (
                   <tr key={order.order_id}>
-                    <td>{order.pay_date}</td>
+                    <td>{order.create_date}</td>
                     <td>{order.ordered_item_name}</td>
                     <td>{order.ordered_item_unit_price}</td>
                     <td>{order.total_amount}</td>
@@ -107,7 +98,7 @@ const OrderHistory = () => {
           <hr />
         </>
       )}
-      {loading === 3 && <Loading />}
+      {!selfOrders && <Loading />}
     </div>
   );
 };
