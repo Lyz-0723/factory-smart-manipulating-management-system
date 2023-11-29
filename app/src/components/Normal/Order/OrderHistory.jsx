@@ -18,39 +18,44 @@ const OrderHistory = () => {
     check: "Check",
   };
 
+  const color = {
+    red: "Red",
+    black: "Black",
+    blue: "Blue",
+  };
+
+  const get_orders = async () => {
+    const self_orders = await get_order_history();
+    let status_list = []; // Prevent pending data
+    if (allOrderStatus.length === 0) {
+      status_list = await get_order_status();
+    }
+    if (self_orders.length !== 0) {
+      const complete_orders = self_orders.map((order) => {
+        const spec_item = allItem.find(
+          (item) => item.item_id === order.ordered_item_id
+        );
+        const spec_status = // Use cache data if it's ready
+          allOrderStatus.length !== 0
+            ? allOrderStatus.find((status) => status.status_id === order.status)
+            : status_list;
+        return {
+          order_id: order.order_id,
+          total_amount: order.total_amount,
+          create_date: order.create_date,
+          payment_method: order.payment_method,
+          pay_date: order.pay_date,
+          customize_details: order.customize_details,
+          status: spec_status.status,
+          ordered_item_name: spec_item ? spec_item.item_name : "Pending",
+          ordered_item_unit_price: spec_item ? spec_item.unit_price : 0,
+        };
+      });
+      setSelfOrders(complete_orders);
+    }
+  };
+
   useEffect(() => {
-    const get_orders = async () => {
-      const self_orders = await get_order_history();
-      let status_list = []; // Prevent pending data
-      if (allOrderStatus.length === 0) {
-        status_list = await get_order_status();
-      }
-      if (self_orders.length !== 0) {
-        const complete_orders = self_orders.map((order) => {
-          const spec_item = allItem.find(
-            (item) => item.item_id === order.ordered_item_id
-          );
-          const spec_status = // Use cache data if it's ready
-            allOrderStatus.length !== 0
-              ? allOrderStatus.find(
-                  (status) => status.status_id === order.status
-                )
-              : status_list;
-          return {
-            order_id: order.order_id,
-            total_amount: order.total_amount,
-            create_date: order.create_date,
-            payment_method: order.payment_method,
-            pay_date: order.pay_date,
-            customize_details: order.customize_details,
-            status: spec_status.status,
-            ordered_item_name: spec_item ? spec_item.item_name : "Pending",
-            ordered_item_unit_price: spec_item ? spec_item.unit_price : 0,
-          };
-        });
-        setSelfOrders(complete_orders);
-      }
-    };
     get_orders();
     // eslint-disable-next-line
   }, []);
@@ -94,6 +99,7 @@ const OrderHistory = () => {
     const payment_method = document.getElementById(
       "order_payment_method"
     ).value;
+    console.log(payment_method);
 
     if (
       await modify_specific_order(
@@ -103,8 +109,14 @@ const OrderHistory = () => {
         ordered_item_id,
         order_id
       )
-    )
+    ) {
       alert("Order changed successfully!");
+      const orders = await get_orders();
+      if (orders) {
+        setSelfOrders(orders);
+      }
+    } else alert("Order changed failed!");
+    setModifying(undefined);
   };
 
   return (
@@ -156,15 +168,13 @@ const OrderHistory = () => {
                       </td>
                     )}
                     {modifying !== order.order_id && (
-                      <td>
-                        {paymentMethod[order.customize_details.split(":")[0]]}
-                      </td>
+                      <td>{color[order.customize_details.split(":")[0]]}</td>
                     )}
                     {modifying !== order.order_id && (
                       <td>{order.customize_details.split(":")[1]}</td>
                     )}
                     {modifying !== order.order_id && (
-                      <td>{paymentMethod[order.payment_method]}</td>
+                      <td>{order.payment_method}</td>
                     )}
                     {/* Modify section */}
                     {modifying === order.order_id && (
@@ -244,8 +254,8 @@ const OrderHistory = () => {
                           defaultValue={paymentMethod[order.payment_method]}
                         >
                           <option value="credit_card">Credit Card</option>
-                          <option value="paypal">PayPal</option>
-                          <option value="bank_transfer">Bank Transfer</option>
+                          <option value="debit_card">Debit Card</option>
+                          <option value="check">Check</option>
                         </select>
                       </td>
                     )}
