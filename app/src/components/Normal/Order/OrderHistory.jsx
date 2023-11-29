@@ -156,7 +156,9 @@ const OrderHistory = () => {
                       </td>
                     )}
                     {modifying !== order.order_id && (
-                      <td>{order.customize_details.split(":")[0]}</td>
+                      <td>
+                        {paymentMethod[order.customize_details.split(":")[0]]}
+                      </td>
                     )}
                     {modifying !== order.order_id && (
                       <td>{order.customize_details.split(":")[1]}</td>
@@ -174,7 +176,9 @@ const OrderHistory = () => {
                           onChange={() => changeItemSelected()}
                         >
                           {allItem.map((item) => (
-                            <option>{item.item_name}</option>
+                            <option key={item.item_name}>
+                              {item.item_name}
+                            </option>
                           ))}
                         </select>
                       </td>
@@ -209,9 +213,15 @@ const OrderHistory = () => {
                           name="item_customized_color"
                           id="item_customized_color"
                         >
-                          <option value="red">Red</option>
-                          <option value="black">Black</option>
-                          <option value="blue">Blue</option>
+                          <option value="red" key="red">
+                            Red
+                          </option>
+                          <option value="black" key="black">
+                            Black
+                          </option>
+                          <option value="blue" key="blue">
+                            Blue
+                          </option>
                         </select>
                       </td>
                     )}
