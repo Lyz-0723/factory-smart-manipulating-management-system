@@ -16,13 +16,13 @@ export const get_order_history = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching access token:", error);
+    console.error(error);
   }
 };
 export default get_order_history;
@@ -42,13 +42,13 @@ export const get_self_user = async () => {
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching access token:", error);
+    console.error(error);
   }
 };
 
@@ -97,12 +97,12 @@ export const send_new_order = async (
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     return true;
   } catch (error) {
-    console.error("Error fetching access token:", error);
+    console.error(error);
   }
 };
 
@@ -133,12 +133,12 @@ export const modify_user_detail = async (
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     return true;
   } catch (error) {
-    console.error("Error fetching access token:", error);
+    console.error(error);
   }
 };
 
@@ -162,10 +162,10 @@ export const modify_specific_order = async (
 
   // Set the request body
   let body = {
-    total_amount: parseInt(total_amount),
-    payment_method: payment_method,
+    total_amount: total_amount,
+    payment_method: payment_method_map[payment_method],
     customize_details: customize_details,
-    ordered_item_id: parseInt(ordered_item_id),
+    ordered_item_id: ordered_item_id,
     order_id: order_id,
   };
 
@@ -181,11 +181,11 @@ export const modify_specific_order = async (
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      throw new Error("Action failed");
     }
 
     return true;
   } catch (error) {
-    console.error("Error fetching access token:", error);
+    console.error(error);
   }
 };

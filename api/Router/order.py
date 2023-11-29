@@ -73,7 +73,7 @@ async def modify_order(modified_order: ModifyOrder,
     if modified_order.order_id <= 0 or order.ordered_user_id != current_user.user_id:
         raise action_forbidden
 
-    if get_spec_order_status(order.status) != "Pending":
+    if (await get_spec_order_status(order.status)).status != "Pending":
         raise bad_request
 
     if modified_order.ordered_item_id and not await check_item(modified_order.ordered_item_id):
