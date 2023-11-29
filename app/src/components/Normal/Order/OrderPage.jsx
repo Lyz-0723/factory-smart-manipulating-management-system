@@ -76,8 +76,8 @@ const OrderPage = () => {
               Select Payment Method
             </option>
             <option value="credit_card">Credit Card</option>
-            <option value="paypal">PayPal</option>
-            <option value="bank_transfer">Bank Transfer</option>
+            <option value="debit_card">Debit Card</option>
+            <option value="check">Check</option>
           </select>
 
           <label className="form-label" htmlFor="customize_details">
