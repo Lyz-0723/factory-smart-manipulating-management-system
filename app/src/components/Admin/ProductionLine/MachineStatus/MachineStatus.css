@@ -1,0 +1,11 @@
+.machine-status {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.machine-status:hover {
+  background-color: #eee;
+}

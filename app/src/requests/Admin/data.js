@@ -302,3 +302,67 @@ export const get_production_line_status = async () => {
     console.error("Error fetching access token:", error);
   }
 };
+
+export const add_new_machine = async (
+  pl_id,
+  serial_number,
+  machine_usage,
+  position
+) => {
+  // Add new production line with data
+
+  const token = window.localStorage.getItem("access_token");
+  const body = {
+    pl_id: pl_id,
+    serial_number: serial_number,
+    machine_usage: machine_usage,
+    position: position,
+    status: 1,
+    script: "",
+  };
+
+  try {
+    const response = await fetch(`${path}/machine/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Action failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const delete_production_line = async (pl_id) => {
+  // Delete specific production line
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(`${path}/pl/${pl_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};

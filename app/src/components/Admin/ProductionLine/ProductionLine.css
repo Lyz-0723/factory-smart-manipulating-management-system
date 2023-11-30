@@ -53,6 +53,7 @@ section {
 }
 
 .add-machine-btn,
+.machine-add-function,
 .modify-production-line,
 .confirm-modify-production-line,
 .add-production-line-btn {
@@ -63,6 +64,11 @@ section {
   border: none;
   border-radius: 5px;
 }
+
+.machine-add-function-input {
+  width: 40%;
+}
+
 .modify-production-line,
 .confirm-modify-production-line {
   position: absolute;

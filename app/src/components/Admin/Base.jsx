@@ -4,6 +4,7 @@ import { AppContext } from "../../App";
 import AdminDashBoard from "./Dashboard/AdminDashboard";
 import OrderManagement from "./Order/OrderManagement";
 import EnvironmentMonitor from "./Environment/EnvironmentPage";
+import MachineStatus from "./ProductionLine/MachineStatus/MachineStatus";
 import Loading from "../Common/Loading";
 
 import ProductionLinePage from "./ProductionLine/ProductionLine";
@@ -83,6 +84,7 @@ const AdminBase = () => {
           {mode === 52 && <OrderManagement />}
           {mode === 53 && <EnvironmentMonitor />}
           {mode === 54 && <ProductionLinePage />}
+          {mode === 55 && <MachineStatus />}
 
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}

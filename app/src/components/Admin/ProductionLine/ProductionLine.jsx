@@ -7,15 +7,19 @@ import {
   get_all_pl,
   add_new_production_line,
   get_production_line_status,
+  add_new_machine,
 } from "../../../requests/Admin/data";
 import Loading from "../../Common/Loading";
+import { AppContext } from "../../../App";
 
 const ProductionLinePage = () => {
+  const { setMode } = useContext(AppContext);
   const { allProductionLine, setAllProductionLine, allItem } =
     useContext(AdminContext);
   const [allMachine, setAllMachine] = useState(undefined);
   const [modify, setModify] = useState(undefined);
   const [addNew, setAddNew] = useState(false);
+  const [addNewMachine, setAddNewMachine] = useState(undefined);
   const [productionLineStatus, setProductionLineStatus] = useState(undefined);
 
   useEffect(() => {
@@ -72,6 +76,49 @@ const ProductionLinePage = () => {
     setAddNew(false);
   };
 
+  const add_new_machine_in_pl = async () => {
+    const pl_id = addNewMachine;
+    const serial_number = document.getElementById(
+      "add-new-machine-serial-number"
+    ).value;
+    const machine_usage = document.getElementById(
+      "add-new-machine-usage"
+    ).value;
+    const position = document.getElementById("add-new-machine-position").value;
+
+    if (
+      pl_id &&
+      serial_number &&
+      machine_usage &&
+      position &&
+      (await add_new_machine(pl_id, serial_number, machine_usage, position))
+    ) {
+      alert("Process success!");
+      const new_machine = await get_machine_in_pl(pl_id);
+      if (new_machine) {
+        setAllMachine(() => {
+          return allMachine.map((machineSet) => {
+            if (machineSet.pl_id === pl_id) {
+              return { pl_id, machines: new_machine };
+            }
+            return machineSet;
+          });
+        });
+      }
+      setAddNewMachine(undefined);
+      return;
+    }
+    alert("Process failed!");
+    setAddNewMachine(undefined);
+    return;
+  };
+
+  // const delete_specific_production_line = async (pl_id) => {
+  //   if (await delete_production_line(pl_id)) {
+  //     alert("Delete process success!");
+  //   }
+  // };
+
   return (
     <div className="pl-containerr">
       <header>
@@ -85,7 +132,14 @@ const ProductionLinePage = () => {
               <div className="production-line" key={pl.pl_id}>
                 {modify !== pl.pl_id && (
                   <div key={pl.pl_id}>
-                    <div className="production-line-title">{pl.pl_name}</div>
+                    <div
+                      className="production-line-title"
+                      style={{ display: "flex" }}
+                    >
+                      {pl.pl_name}{" "}
+                      <button style={{ marginLeft: "10px" }}>X</button>
+                    </div>
+
                     <b>
                       <div className="production-line-description">
                         {pl.pl_description}
@@ -119,7 +173,7 @@ const ProductionLinePage = () => {
                 {allMachine
                   .find((machineSet) => machineSet.pl_id === pl.pl_id)
                   .machines.map((machine) => (
-                    <div className="machine">
+                    <div className="machine" onClick={() => setMode(55)}>
                       <div className="machine-preview">
                         <p>Serial Number: {machine.serial_number}</p>
                         <p>Usage: {machine.machine_usage}</p>
@@ -133,9 +187,52 @@ const ProductionLinePage = () => {
                     </div>
                   ))}
 
-                <button className="add-machine-btn" onClick={() => {}}>
-                  新增機台
-                </button>
+                {addNewMachine === pl.pl_id && (
+                  <div className="machine">
+                    <input
+                      className="machine-add-function-input"
+                      id="add-new-machine-serial-number"
+                      placeholder="New Machine Serial Number"
+                    />{" "}
+                    <input
+                      className="machine-add-function-input"
+                      id="add-new-machine-usage"
+                      placeholder="New Machine Usage"
+                    />{" "}
+                    <input
+                      className="machine-add-function-input"
+                      type="number"
+                      id="add-new-machine-position"
+                      placeholder="New Machine position"
+                      min={1}
+                    />
+                  </div>
+                )}
+
+                {!addNewMachine && (
+                  <button
+                    className="add-machine-btn"
+                    onClick={() => setAddNewMachine(pl.pl_id)}
+                  >
+                    新增機台
+                  </button>
+                )}
+                {addNewMachine === pl.pl_id && (
+                  <>
+                    <button
+                      className="machine-add-function"
+                      onClick={() => add_new_machine_in_pl()}
+                    >
+                      確認
+                    </button>{" "}
+                    <button
+                      className="machine-add-function"
+                      onClick={() => setAddNewMachine(undefined)}
+                    >
+                      取消
+                    </button>
+                  </>
+                )}
 
                 {!modify && (
                   <button
