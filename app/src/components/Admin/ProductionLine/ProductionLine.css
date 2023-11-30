@@ -1,0 +1,140 @@
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+section {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pl-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.production-line {
+  /* flex: 1; */
+  margin: 10px;
+  background-color: #ddd;
+  border: 1px solid #999;
+  padding: 10px;
+  position: relative;
+  width: calc(46%);
+  /* max-width: calc(30% - 20px); Adjust the maximum width as needed */
+}
+
+
+.production-line-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.production-line-description {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 40%;
+  margin-right: 60%;
+}
+
+.machine {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.add-machine-btn,
+.modify-production-line,
+.confirm-modify-production-line,
+.add-production-line-btn {
+  cursor: pointer;
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+.modify-production-line,
+.confirm-modify-production-line {
+  position: absolute;
+  top:5%;
+  right:3%;
+}
+.add-production-line-btn {
+  width: 100%;
+}
+
+.add-machine-btn:hover,
+.add-production-line-btn:hover {
+  background-color: #555;
+}
+
+.add-production-line-btn {
+  margin-top: 10px;
+}
+
+.machine-preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  border: 2px solid #1f1e1e;
+  padding: 10px;
+  width: 200px;
+  display: none;
+  z-index: 1;
+}
+
+.machine:hover .machine-preview {
+  display: block;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Style for the confirmation dialog */
+.confirmation-dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.confirmation-dialog h2 {
+  margin-bottom: 10px;
+}
+
+.confirmation-dialog button {
+  cursor: pointer;
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.confirmation-dialog button:hover {
+  background-color: #555;
+}

@@ -6,10 +6,11 @@ import OrderManagement from "./Order/OrderManagement";
 import EnvironmentMonitor from "./Environment/EnvironmentPage";
 import Loading from "../Common/Loading";
 
-import MachinePage from "./Machine/Machine";
+import ProductionLinePage from "./ProductionLine/ProductionLine";
 import get_all_users, {
   get_all_items,
   get_order_status,
+  get_all_pl,
 } from "../../requests/Admin/data";
 
 import "../Base.css";
@@ -22,24 +23,20 @@ const AdminBase = () => {
   const [allUser, setAllUser] = useState(undefined);
   const [allItem, setAllItem] = useState(undefined);
   const [allOrderStatus, setAllOrderStatus] = useState(undefined);
+  const [allProductionLine, setAllProductionLine] = useState(undefined);
 
   useEffect(() => {
     const get_data = async () => {
       const all_users = await get_all_users();
       const all_items = await get_all_items();
       const all_order_status = await get_order_status();
-      if (
-        all_users.length !== 0 &&
-        all_items.length !== 0 &&
-        all_order_status.length !== 0
-      ) {
+      const all_pl = await get_all_pl();
+      if (all_users && all_items && all_order_status && all_pl) {
         setAllUser(all_users);
         setAllItem(all_items);
         setAllOrderStatus(all_order_status);
-      } else {
-        setAllUser([]);
-        setAllItem([]);
-        setAllOrderStatus([]);
+        setAllProductionLine(all_pl);
+        console.log(all_pl);
       }
     };
     get_data();
@@ -47,7 +44,15 @@ const AdminBase = () => {
   }, []);
 
   return (
-    <AdminContext.Provider value={{ allUser, allItem, allOrderStatus }}>
+    <AdminContext.Provider
+      value={{
+        allUser,
+        allItem,
+        allOrderStatus,
+        allProductionLine,
+        setAllProductionLine,
+      }}
+    >
       {allUser && allItem && allOrderStatus && (
         <div className="container">
           <div className="header">
@@ -77,7 +82,7 @@ const AdminBase = () => {
           {mode === 51 && <AdminDashBoard />}
           {mode === 52 && <OrderManagement />}
           {mode === 53 && <EnvironmentMonitor />}
-          {mode === 54 && <MachinePage />}
+          {mode === 54 && <ProductionLinePage />}
 
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}

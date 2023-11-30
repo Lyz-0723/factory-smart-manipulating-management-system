@@ -150,3 +150,91 @@ export const get_environment_datas = async () => {
     console.error("Error fetching access token:", error);
   }
 };
+
+export const get_all_pl = async () => {
+  // Get all production lines
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(`${path}/pl`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};
+
+export const get_machine_in_pl = async (pl_id) => {
+  // Get all production lines
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(`${path}/machine/pl/${pl_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
+  }
+};
+
+export const modify_production_line = async (
+  pl_id,
+  pl_name,
+  pl_description
+) => {
+  // Modify production line info
+
+  const token = window.localStorage.getItem("access_token");
+  const body = {
+    pl_id: pl_id,
+    pl_name: pl_name,
+    pl_description: pl_description,
+  };
+  console.log(body);
+
+  try {
+    const response = await fetch(`${path}/pl/`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Action failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+};
