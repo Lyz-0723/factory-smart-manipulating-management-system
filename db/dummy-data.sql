@@ -35,10 +35,10 @@ INSERT INTO Production_Line_Records (rating, production_output, energy_consumpti
 -- Machines table
 INSERT INTO Machines (serial_number, machine_usage, position, status, script, pl_id) VALUES
 ('SN1', 'Usage 1', 1, 1, 'Script 1...', 1),
-('SN2', 'Usage 2', 2, 2, 'Script 2...', 2),
-('SN3', 'Usage 3', 3, 3, 'Script 3...', 3),
-('SN4', 'Usage 4', 4, 4, 'Script 4...', 4),
-('SN5', 'Usage 5', 5, 5, 'Script 5...', 5);
+('SN2', 'Usage 2', 2, 1, 'Script 2...', 2),
+('SN3', 'Usage 3', 3, 1, 'Script 3...', 3),
+('SN4', 'Usage 4', 4, 1, 'Script 4...', 4),
+('SN5', 'Usage 5', 5, 1, 'Script 5...', 5);
 
 -- Orders table
 INSERT INTO Orders (total_amount, status, create_date, payment_method, pay_date, customize_details, ordered_user_id, ordered_item_id) VALUES

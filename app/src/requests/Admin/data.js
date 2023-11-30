@@ -216,7 +216,6 @@ export const modify_production_line = async (
     pl_name: pl_name,
     pl_description: pl_description,
   };
-  console.log(body);
 
   try {
     const response = await fetch(`${path}/pl/`, {
@@ -236,5 +235,70 @@ export const modify_production_line = async (
     return true;
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const add_new_production_line = async (
+  pl_name,
+  pl_desctiption,
+  item_id
+) => {
+  // Add new production line with data
+
+  const token = window.localStorage.getItem("access_token");
+  const body = {
+    pl_name: pl_name,
+    pl_description: pl_desctiption,
+    status: 1,
+    item_id: item_id,
+  };
+
+  try {
+    const response = await fetch(`${path}/pl/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Action failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const get_production_line_status = async () => {
+  // Get specific production line
+
+  const token = window.localStorage.getItem("access_token");
+
+  try {
+    const response = await fetch(
+      `${path}/status_and_rating/production_line_status`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Authentication failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching access token:", error);
   }
 };
