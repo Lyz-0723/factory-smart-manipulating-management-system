@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, createContext } from "react";
 
 import get_order_history, {
   modify_specific_order,
@@ -6,9 +6,13 @@ import get_order_history, {
 import { get_order_status } from "../../../requests/Admin/data";
 import { NormalContext } from "../Base";
 import Loading from "../../Common/Loading";
+import { AppContext } from "../../../App";
+
+export const OrderContext = createContext(null);
 
 const OrderHistory = () => {
   let { allItem, allOrderStatus } = useContext(NormalContext);
+  let { setMode } = useContext(AppContext);
   const [selfOrders, setSelfOrders] = useState(undefined);
   const [modifying, setModifying] = useState(undefined);
 
@@ -120,12 +124,12 @@ const OrderHistory = () => {
   };
 
   return (
-    <div>
+    <OrderContext.Provider value={{ selfOrders }}>
       {selfOrders && (
         <>
           <div>
             <p>Overview</p>
-            <button>Payment</button>
+            <button onClick={() => setMode(6)}>Payment</button>
           </div>
           <table style={{ width: "100%" }}>
             <thead>
@@ -289,7 +293,7 @@ const OrderHistory = () => {
         </>
       )}
       {!selfOrders && <Loading />}
-    </div>
+    </OrderContext.Provider>
   );
 };
 

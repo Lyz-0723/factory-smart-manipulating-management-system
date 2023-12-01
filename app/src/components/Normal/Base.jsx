@@ -10,6 +10,7 @@ import "../Base.css";
 import Loading from "../Common/Loading";
 import { get_all_items, get_order_status } from "../../requests/Admin/data";
 import { get_self_detail } from "../../requests/user";
+import PaymentPage from "./Order/Payment/Payment";
 
 export const NormalContext = createContext(null);
 
@@ -92,6 +93,7 @@ const NormalBase = () => {
           {mode === 3 && <OrderPage />}
           {mode === 4 && <ContactPage />}
           {mode === 5 && <AccountManagement />}
+          {mode === 6 && <PaymentPage />}
           <div className="footer">
             {/* <img src="footer-logo.svg" alt="Footer Logo" className="footer-logo"> */}
             <div className="footer-text">
