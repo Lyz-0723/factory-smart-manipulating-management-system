@@ -9,7 +9,8 @@ const PaymentPage = () => {
   const [selfOrders, setSelfOrders] = useState(undefined);
   const [paymentAmount, setPaymentAmount] = useState(0);
   const get_orders = async () => {
-    const self_orders = await get_order_history();
+    let self_orders = await get_order_history();
+    self_orders = self_orders.filter((order) => order.status === 1);
     let status_list = []; // Prevent pending data
     if (allOrderStatus.length === 0) {
       status_list = await get_order_status();
